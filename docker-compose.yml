@@ -1,0 +1,33 @@
+services:
+  # 1. El Servidor del Juego
+  xonotic-server:
+    build: .
+    image: server:latest
+    container_name: servidor_xonotic
+    ports:
+      - "26000:26000/udp"
+    volumes:
+      - ./data:/home/xonotic/.xonotic
+    
+    restart: unless-stopped
+
+  # 2. El Analizador de Red (Zeek)
+  zeek-monitor:
+    image: zeek/zeek:latest
+    container_name: zeek_xonotic_monitor
+    # ¡LA MAGIA!: Obligamos a Zeek a usar la misma red que el servidor de Xonotic
+    network_mode: "service:xonotic-server"
+    # Damos permisos a Zeek para que pueda capturar paquetes de red
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      # Carpeta local donde guardaremos los logs de texto que genere Zeek
+      - ./zeek-logs:/logs
+    working_dir: /logs
+    # Le decimos a Zeek que escuche la interfaz 'eth0' en tiempo real
+    command: zeek -i eth0
+    depends_on:
+      - xonotic-server
+    restart: unless-stopped
+    
