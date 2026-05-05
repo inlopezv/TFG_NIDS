@@ -1,0 +1,10 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	known_services
+#open	2026-05-04-20-53-24
+#fields	ts	host	port_num	port_proto	service
+#types	time	addr	port	enum	set[string]
+1777928004.616084	172.18.0.2	26000	udp	AYIYA
+1777927711.270337	172.18.0.2	26000	udp	(empty)

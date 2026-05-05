@@ -1,0 +1,21 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	conn
+#open	2026-05-04-21-58-58
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	service	duration	orig_bytes	resp_bytes	conn_state	local_orig	local_resp	missed_bytes	history	orig_pkts	orig_ip_bytes	resp_pkts	resp_ip_bytes	tunnel_parents	ip_proto
+#types	time	string	addr	port	addr	port	enum	string	interval	count	count	string	bool	bool	count	string	count	count	count	count	set[string]	count
+1777931878.049549	CTFK5l19ueMOyfzD23	::	135	ff02::1:fff8:6cd1	136	icmp	-	-	-	-	OTH	T	F	0	-	1	72	0	0	-	58
+1777931878.081645	CCImUc3Oh30xlkNgOf	::	143	ff02::16	0	icmp	-	0.383855	60	0	OTH	T	F	0	-	2	172	0	0	-	58
+1777931878.529598	CzRIZ38UieIqKVTN2	fe80::dc2f:30ff:fe01:dd5	143	ff02::16	0	icmp	-	0.191943	80	0	OTH	T	F	0	-	2	192	0	0	-	58
+1777931879.069550	CbJFRK3aH4PezG4vSf	fe80::c0b3:80ff:fef8:6cd1	143	ff02::16	0	icmp	-	0.419984	40	0	OTH	T	F	0	-	2	152	0	0	-	58
+1777931879.645407	CxjgDC2LqsXVsTkyEh	172.18.0.2	26000	164.90.169.60	27777	udp	-	0.049419	25	23	SF	T	F	0	Dd	1	53	1	51	-	17
+1777931879.658945	CgEhhm1bdSTx0oMM5g	172.18.0.2	26000	107.161.23.68	27950	udp	-	0.544221	360	21	SF	T	F	0	Dd	2	416	1	49	-	17
+1777931879.656924	CXRyLuaoOFVi7xSz8	172.18.0.2	26000	172.105.172.126	42863	udp	-	0.546278	362	23	SF	T	F	0	Dd	2	418	1	51	-	17
+1777931879.069557	CX97nC3zK9WqZB2z53	fe80::c0b3:80ff:fef8:6cd1	133	ff02::2	134	icmp	-	68.287963	40	0	OTH	T	F	0	-	5	280	0	0	-	58
+1777932019.037541	CqT7o8UKlXVXAeH3i	fe80::c0b3:80ff:fef8:6cd1	133	ff02::2	134	icmp	-	-	-	-	OTH	T	F	0	-	1	56	0	0	-	58
+1777932172.637600	CIgJLT1pW3bGxzJzsj	fe80::c0b3:80ff:fef8:6cd1	133	ff02::2	134	icmp	-	-	-	-	OTH	T	F	0	-	1	56	0	0	-	58
+1777932353.529567	CpS3sI2joCIciDsFEe	172.18.0.1	38343	172.18.0.2	26000	udp	-	0.001682	25	490	SF	T	T	0	Dd	2	81	1	518	-	17
+1777931897.469777	CIIANm3TCdlXcNzfrb	172.18.0.1	49116	172.18.0.2	26000	udp	-	457.394813	3362903	3753196	SF	T	T	0	Dd	25661	4081411	15860	4197276	-	17
+1777932451.169518	C6eCzj3MfclryLB9S4	fe80::c0b3:80ff:fef8:6cd1	133	ff02::2	134	icmp	-	-	-	-	OTH	T	F	0	-	1	56	0	0	-	58

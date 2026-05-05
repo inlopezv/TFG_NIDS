@@ -1,7 +1,9 @@
 services:
   # 1. El Servidor del Juego
   xonotic-server:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile.xonotic
     image: server:latest
     container_name: servidor_xonotic
     ports:
@@ -13,20 +15,25 @@ services:
 
   # 2. El Analizador de Red (Zeek)
   zeek-monitor:
-    image: zeek/zeek:latest
+    build: 
+        context: .
+        dockerfile: Dockerfile.zeek
+    image: zeek:latest
     container_name: zeek_xonotic_monitor
-    # ¡LA MAGIA!: Obligamos a Zeek a usar la misma red que el servidor de Xonotic
+    # Obligamos a Zeek a usar la misma red que el servidor de Xonotic
     network_mode: "service:xonotic-server"
     # Damos permisos a Zeek para que pueda capturar paquetes de red
     cap_add:
       - NET_ADMIN
       - NET_RAW
+
+    #normal, malicious_autocliker,flood_attack
+    environment:
+      - ETIQUETA=malicious_autocliker
     volumes:
       # Carpeta local donde guardaremos los logs de texto que genere Zeek
-      - ./zeek-logs:/logs
-    working_dir: /logs
+      - ./traffic_logs:/traffic_logs
     # Le decimos a Zeek que escuche la interfaz 'eth0' en tiempo real
-    command: zeek -i eth0
     depends_on:
       - xonotic-server
     restart: unless-stopped

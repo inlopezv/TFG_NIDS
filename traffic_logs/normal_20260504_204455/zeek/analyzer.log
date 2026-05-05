@@ -1,0 +1,9 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	analyzer
+#open	2026-05-04-20-54-09
+#fields	ts	analyzer_kind	analyzer_name	uid	fuid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	failure_reason	failure_data
+#types	time	string	string	string	string	addr	port	addr	port	enum	string	string
+1777928049.722383	packet	TEREDO	C6l2Sz1xhMraAasr9b	-	172.18.0.1	52101	172.18.0.2	26000	udp	Truncated Teredo or invalid inner IP version	l\x00s\xef\xfc\xbb\xe0\xb3i<\x0a\x13\xadM\x9e\xbb0\x10\x01\x0b\x00\x00;K\x07|w\x90B\x0f`\x04\xa2\xe8C\xc1Y\x06\xb4\xc3

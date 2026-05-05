@@ -1,0 +1,23 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	conn
+#open	2026-05-04-20-45-56
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	service	duration	orig_bytes	resp_bytes	conn_state	local_orig	local_resp	missed_bytes	history	orig_pkts	orig_ip_bytes	resp_pkts	resp_ip_bytes	tunnel_parents	ip_proto
+#types	time	string	addr	port	addr	port	enum	string	interval	count	count	string	bool	bool	count	string	count	count	count	count	set[string]	count
+1777927496.408763	CdMKSI1TSQeXMTGKCb	::	143	ff02::16	0	icmp	-	0.031966	60	0	OTH	T	F	0	-	2	172	0	0	-	58
+1777927496.632722	CDJWN34dJjeDcYVT3c	172.18.0.1	0	224.0.0.22	0	unknown_transport	-	-	-	-	OTH	T	T	0	-	1	40	0	0	-	2
+1777927496.700751	CiOY4J3XdLa4K9VoD3	::	135	ff02::1:ff90:d107	136	icmp	-	-	-	-	OTH	T	F	0	-	1	72	0	0	-	58
+1777927497.144778	CEgfJt1mSdvaBGbToe	fe80::24f2:1eff:fea7:a705	143	ff02::16	0	icmp	-	0.671933	40	0	OTH	T	F	0	-	2	152	0	0	-	58
+1777927497.720768	CysPNp4zmMjA0VSJqa	fe80::14d8:56ff:fe90:d107	143	ff02::16	0	icmp	-	0.928074	80	0	OTH	T	F	0	-	2	192	0	0	-	58
+1777927498.120879	CATAS92xUNqEpf7Ni7	172.18.0.2	26000	164.90.169.60	27777	udp	-	1.015372	343	20	SF	T	F	0	Dd	2	399	1	48	-	17
+1777927498.747589	CxH46P2zEVExdBppo1	172.18.0.2	26000	172.105.172.126	42863	udp	-	0.388767	346	23	SF	T	F	0	Dd	2	402	1	51	-	17
+1777927499.128202	C5I9mX3UDo4A9gtdr1	172.18.0.2	26000	107.161.23.68	27950	udp	-	0.129251	25	23	SF	T	F	0	Dd	1	53	1	51	-	17
+1777927499.257467	CqKR7i4nHcu7iHYuQ7	172.18.0.2	3	107.161.23.68	3	icmp	-	-	-	-	OTH	T	F	0	-	1	79	0	0	-	1
+1777927497.144787	CW9e2k4yiAykGPeCYi	fe80::24f2:1eff:fea7:a705	133	ff02::2	134	icmp	-	59.359965	40	0	OTH	T	F	0	-	5	280	0	0	-	58
+1777927617.944741	CfArX11uQuynwUZbvh	fe80::24f2:1eff:fea7:a705	133	ff02::2	134	icmp	-	-	-	-	OTH	T	F	0	-	1	56	0	0	-	58
+1777927651.243884	CIbSHu4zZsJMpODMOd	172.18.0.1	47973	172.18.0.2	26000	udp	-	0.020089	25	495	SF	T	T	0	Dd	2	81	1	523	-	17
+1777927740.828708	Chfx513XHjSBnGY09h	fe80::24f2:1eff:fea7:a705	133	ff02::2	134	icmp	-	-	-	-	OTH	T	F	0	-	1	56	0	0	-	58
+1777927992.728791	CfFJPG253NbCHzUNbk	fe80::24f2:1eff:fea7:a705	133	ff02::2	134	icmp	-	-	-	-	OTH	T	F	0	-	1	56	0	0	-	58
+1777927534.536096	C6l2Sz1xhMraAasr9b	172.18.0.1	52101	172.18.0.2	26000	udp	ayiya	715.748760	5837938	7109582	SF	T	T	0	Dd	44696	7089426	25323	7818626	-	17

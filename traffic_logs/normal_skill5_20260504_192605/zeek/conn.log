@@ -1,0 +1,16 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	conn
+#open	2026-05-04-19-27-06
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	service	duration	orig_bytes	resp_bytes	conn_state	local_orig	local_resp	missed_bytes	history	orig_pkts	orig_ip_bytes	resp_pkts	resp_ip_bytes	tunnel_parents	ip_proto
+#types	time	string	addr	port	addr	port	enum	string	interval	count	count	string	bool	bool	count	string	count	count	count	count	set[string]	count
+1777922766.136790	C9hZza3Blir6ikV3Va	fe80::466:fdff:fe44:6cf1	143	ff02::16	0	icmp	-	0.179972	40	0	OTH	T	F	0	-	2	152	0	0	-	58
+1777922767.208331	CoHk3y4BqGf0oLDL97	172.18.0.2	26000	164.90.169.60	27777	udp	-	1.236788	346	23	SF	T	F	0	Dd	2	402	1	51	-	17
+1777922768.231255	CHMzO225hnlGFqrLF5	172.18.0.2	26000	172.105.172.126	42863	udp	-	0.302015	25	20	SF	T	F	0	Dd	1	53	1	48	-	17
+1777922768.533286	CEPetZ1CNtfXJSqW7c	172.18.0.2	3	172.105.172.126	3	icmp	-	-	-	-	OTH	T	F	0	-	1	76	0	0	-	1
+1777922768.439301	C0ijBN3wFnigWrcb1	172.18.0.2	26000	107.161.23.68	27950	udp	-	0.181857	25	20	SF	T	F	0	Dd	1	53	1	48	-	17
+1777922768.621177	CqxVbj3vzCmGINoL99	172.18.0.2	3	107.161.23.68	3	icmp	-	-	-	-	OTH	T	F	0	-	1	76	0	0	-	1
+1777922766.136802	CKDMnS198Bc7nsPOFk	fe80::466:fdff:fe44:6cf1	133	ff02::2	134	icmp	-	57.439957	40	0	OTH	T	F	0	-	5	280	0	0	-	58
+1777922885.016767	CgnoD849bOE0mMT7rd	fe80::466:fdff:fe44:6cf1	133	ff02::2	134	icmp	-	-	-	-	OTH	T	F	0	-	1	56	0	0	-	58

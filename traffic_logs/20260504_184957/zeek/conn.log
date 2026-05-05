@@ -1,0 +1,23 @@
+#separator \x09
+#set_separator	,
+#empty_field	(empty)
+#unset_field	-
+#path	conn
+#open	2026-05-04-18-51-00
+#fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	service	duration	orig_bytes	resp_bytes	conn_state	local_orig	local_resp	missed_bytes	history	orig_pkts	orig_ip_bytes	resp_pkts	resp_ip_bytes	tunnel_parents	ip_proto
+#types	time	string	addr	port	addr	port	enum	string	interval	count	count	string	bool	bool	count	string	count	count	count	count	set[string]	count
+1777920599.551725	CLW2Jt10GjfNRAICy2	172.18.0.2	26000	164.90.169.60	27777	udp	-	0.901461	346	23	SF	T	F	0	Dd	2	402	1	51	-	17
+1777920600.230388	CB8MDl455YtK3Y4pfe	172.18.0.2	26000	172.105.172.126	42863	udp	-	0.302191	25	20	SF	T	F	0	Dd	1	53	1	48	-	17
+1777920600.532592	CsOvBv2ja9Oz4Vhxjb	172.18.0.2	3	172.105.172.126	3	icmp	-	-	-	-	OTH	T	F	0	-	1	76	0	0	-	1
+1777920600.450625	CkgycD4PvB2pLc8UYf	172.18.0.2	26000	107.161.23.68	27950	udp	-	0.641171	366	20	SF	T	F	0	Dd	2	422	1	48	-	17
+1777920632.382681	CD2XoK2iw9IUxVNOGh	172.18.0.1	60194	239.255.255.250	3702	udp	-	-	-	-	S0	T	T	0	D	1	635	0	0	-	17
+1777920632.382706	CBPjvJ2yKODEPYPpr5	fe80::6012:81ff:fed6:3cbb	60183	ff02::c	3702	udp	-	-	-	-	S0	T	F	0	D	1	655	0	0	-	17
+1777920632.382727	Cf5Lme46zOW3fmqhlg	fe80::a019:71ff:fe6f:952	56027	ff02::c	3702	udp	-	-	-	-	S0	T	F	0	D	1	655	0	0	-	17
+1777920598.840759	C5EIoe3uKtLxg0xL41	fe80::a019:71ff:fe6f:952	143	ff02::16	0	icmp	-	33.808086	80	0	OTH	T	F	0	-	4	304	0	0	-	58
+1777920632.396812	Cnjb7g2TQfV3krHvrj	172.18.0.1	0	224.0.0.22	0	unknown_transport	-	0.428037	0	0	OTH	T	T	0	-	2	80	0	0	-	2
+1777920598.872757	CVejNq3uYIBrkeDms1	fe80::6012:81ff:fed6:3cbb	143	ff02::16	0	icmp	-	34.432062	120	0	OTH	T	F	0	-	4	344	0	0	-	58
+1777920598.840768	C0rbII1az7CB0Vbsuk	fe80::a019:71ff:fe6f:952	133	ff02::2	134	icmp	-	115.300023	48	0	OTH	T	F	0	-	6	336	0	0	-	58
+1777920832.920779	CkqHT734R3iVTUgp5l	fe80::a019:71ff:fe6f:952	133	ff02::2	134	icmp	-	-	-	-	OTH	T	F	0	-	1	56	0	0	-	58
+1777921078.684813	Cm85ar3oud8VsbeOg9	fe80::a019:71ff:fe6f:952	133	ff02::2	134	icmp	-	-	-	-	OTH	T	F	0	-	1	56	0	0	-	58
+1777921537.436820	Cn0Ai21wFlAIavWROi	fe80::a019:71ff:fe6f:952	133	ff02::2	134	icmp	-	-	-	-	OTH	T	F	0	-	1	56	0	0	-	58
+1777922438.556777	CFwwCF4xQSr0fuQYTf	fe80::a019:71ff:fe6f:952	133	ff02::2	134	icmp	-	-	-	-	OTH	T	F	0	-	1	56	0	0	-	58
