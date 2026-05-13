@@ -10,6 +10,7 @@ services:
       - "26000:26000/udp"
     volumes:
       - ./data:/home/xonotic/.xonotic
+      - ./codigo_juego:/home/xonotic/Xonotic
     
     restart: unless-stopped
 
@@ -29,7 +30,7 @@ services:
 
     #normal, malicious_autocliker,flood_attack
     environment:
-      - ETIQUETA=malicious_autocliker
+      - ETIQUETA=normal
     volumes:
       # Carpeta local donde guardaremos los logs de texto que genere Zeek
       - ./traffic_logs:/traffic_logs
