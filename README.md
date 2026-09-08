@@ -88,9 +88,9 @@ TFG_NIDS/
 │   └── [otros notebooks de análisis]
 │
 ├── 🔗 ENLACES A RECURSOS EXTERNOS
-│   ├── Gráficas y Resultados: [ENLACE A CARPETA]
-│   ├── Modelos Entrenados: [ENLACE A CARPETA]
-│   └── Datasets: [ENLACE A CARPETA]
+│   ├── Gráficas y Resultados
+│   ├── Modelos Entrenados
+│   └── Datasets
 │
 └── .gitignore                        # Excluye archivos de gran tamaño
 ```
@@ -173,7 +173,7 @@ Existen dos opciones:
 cp Xonotic/data/server/progs.dat ./xonotic_volume/progs.dat
 
 # Al levantar Docker:
-docker run -v $(pwd)/xonotic_volume:/home/xonotic/Xonotic xonotic_image
+docker-compose up -d --build
 ```
 
 **OPCIÓN 2: Bakearlo en la imagen Docker**
@@ -189,53 +189,19 @@ El servidor cargará automáticamente `progs.dat` desde:
 
 ---
 
-### Paso 2: Compilar las Imágenes Docker
+### Paso 2: Compilar y Levantar con Docker Compose
 
-#### Compilar Xonotic
-
-```bash
-docker build -t xonotic_nids -f Dockerfile.xonotic .
-```
-
-Opcionales:
-```bash
-docker build --no-cache -t xonotic_nids:latest -f Dockerfile.xonotic .
-docker tag xonotic_nids:latest xonotic_nids:v0.8.6
-```
-
-#### Compilar NIDS (Zeek + Python/IA)
-
-```bash
-docker build -t nids_zeek -f Dockerfile.zeek .
-```
-
-### Paso 3: Crear Volúmenes Compartidos
-
-```bash
-# Crear volúmenes nombrados (persistencia)
-docker volume create xonotic_data
-docker volume create traffic_logs_nids
-docker volume create telemetria_data
-
-# O crear directorios locales
-mkdir -p ./volumes/{xonotic,traffic_logs,telemetria}
-```
-
-### Paso 4: Levantar los Contenedores
-
-#### Opción A: Con Docker Compose (RECOMENDADO)
-
-Crear archivo `docker-compose.yml`:
+#### Crear docker-compose.yml
 
 ```yaml
 version: '3.8'
 
 services:
-  xonotic:
+  servidor_xonotic:
     build:
       context: .
       dockerfile: Dockerfile.xonotic
-    container_name: xonotic_server
+    container_name: servidor_xonotic
     ports:
       - "26000:26000/udp"
     volumes:
@@ -244,15 +210,13 @@ services:
       - nids_net
     restart: unless-stopped
 
-  nids_zeek:
+  zeek_xonotic_monitor:
     build:
       context: .
       dockerfile: Dockerfile.zeek
-    container_name: nids_engine
+    container_name: zeek_xonotic_monitor
     depends_on:
-      - xonotic
-    environment:
-      - ETIQUETA=normal_skill5
+      - servidor_xonotic
     volumes:
       - ./volumes/traffic_logs:/traffic_logs
       - ./volumes/telemetria:/telemetria
@@ -267,42 +231,27 @@ networks:
     driver: bridge
 ```
 
-Ejecutar:
+#### Ejecutar Todo con un Solo Comando
+
 ```bash
-docker-compose up -d
-docker-compose logs -f nids_zeek
+# Crear volúmenes locales si no existen
+mkdir -p ./volumes/{xonotic,traffic_logs,telemetria}
+
+# Compilar imágenes y levantar contenedores
+docker-compose up -d --build
+
+# Esperar a que estén listos (30-60 segundos)
+sleep 30
+
+# Verificar que están corriendo
+docker-compose ps
 ```
 
-#### Opción B: Con comandos Docker directos
-
-```bash
-# Red personalizada
-docker network create nids_net
-
-# Iniciar Xonotic
-docker run -d \
-  --name xonotic_server \
-  -p 26000:26000/udp \
-  -v ./volumes/xonotic:/home/xonotic/Xonotic \
-  --network nids_net \
-  xonotic_nids
-
-# Esperar 5-10 segundos a que Xonotic esté listo...
-
-# Iniciar NIDS
-docker run -d \
-  --name nids_engine \
-  -e ETIQUETA=normal_skill5 \
-  -v ./volumes/traffic_logs:/traffic_logs \
-  -v ./volumes/telemetria:/telemetria \
-  --network nids_net \
-  nids_zeek
+**Resultado esperado:**
 ```
-
-Verificar logs:
-```bash
-docker logs -f nids_engine
-docker logs -f xonotic_server
+NAME                      COMMAND                  SERVICE                    STATUS
+servidor_xonotic          "./xonotic-linux64-d…   servidor_xonotic           Up 2 minutes
+zeek_xonotic_monitor      "/entrypoint.sh"         zeek_xonotic_monitor       Up 1 minute
 ```
 
 ---
@@ -450,28 +399,6 @@ Artefactos esperados:
 
 ---
 
-## 🔧 Configuración de Sesiones
-
-### Variable de Entorno ETIQUETA
-
-Controla la clasificación de la sesión:
-
-```bash
-# Sesión normal
-docker run -e ETIQUETA=normal_skill5 nids_zeek
-
-# Sesión maliciosa
-docker run -e ETIQUETA=malicious_aimbot nids_zeek
-
-# Sesión sin clasificar (por defecto)
-docker run nids_zeek
-# → Se crea carpeta: /traffic_logs/sin_clasificar_20260504_173854/
-```
-
-Genera carpeta: `/traffic_logs/{ETIQUETA}_{AÑO}{MES}{DÍA}_{HORA}{MIN}{SEG}/`
-
----
-
 ## 📈 Dónde se Generan los Datos
 
 ```
@@ -507,7 +434,7 @@ Sistema de Archivos del Contenedor:
 
 ### 🎨 Gráficas y Resultados
 
-> [Enlace a carpeta con gráficas](#)
+[📊 Ver Gráficas y Resultados en Google Drive](https://drive.google.com/drive/folders/1RIUt0ApblIUP2y2FD_d3it5bVIDX2lmP?usp=sharing)
 
 Contenido esperado:
 - Matrices de confusión por clase
@@ -518,7 +445,7 @@ Contenido esperado:
 
 ### 🤖 Modelos Entrenados
 
-> [Enlace a carpeta con modelos](#)
+[🤖 Ver Modelos Entrenados en Google Drive](https://drive.google.com/drive/folders/1GoTs4_Ye4AezjB4QholQI9GubWYFooPC?usp=sharing)
 
 Contenido esperado:
 - `rf_model_v3.pkl` (Random Forest)
@@ -529,7 +456,7 @@ Contenido esperado:
 
 ### 📊 Datasets
 
-> [Enlace a carpeta con datasets](#)
+[📁 Ver Datasets en Google Drive](https://drive.google.com/drive/folders/1M_WdyhWaNMOPdtljqj3o_8pha0RAC0Re?usp=sharing)
 
 Contenido esperado:
 - `dataset_entrenamiento_v3.csv` (Train)
@@ -546,69 +473,10 @@ Contenido esperado:
 
 ```bash
 # NIDS (IA en tiempo real)
-docker logs -f nids_engine
+docker logs -f zeek_xonotic_monitor
 
 # Xonotic (servidor de juego)
-docker logs -f xonotic_server
-```
-
-### Inspeccionar Alertas
-
-```bash
-# En vivo (últimas alertas)
-tail -f ./volumes/traffic_logs/alertas_nids.csv
-
-# Contar alertas por tipo
-awk -F',' 'NR>1 {print $2}' ./volumes/traffic_logs/alertas_nids.csv | sort | uniq -c
-```
-
-### Analizar Stream en Vivo
-
-```bash
-# Ver últimas predicciones
-tail -20 ./volumes/traffic_logs/nids_stream_live.csv
-
-# Contar predicciones por clase
-awk -F',' 'NR>1 {print $COLUMN_PRED}' ./volumes/traffic_logs/nids_stream_live.csv | sort | uniq -c
-```
-
----
-
-## 🛠️ Troubleshooting
-
-### NIDS no inicia
-
-**Error**: `[NIDS-ERROR CRÍTICO] Fallo en la carga de modelos`
-
-**Solución**:
-```bash
-# Verificar modelos existen
-ls -la ./volumes/traffic_logs/modelos/
-
-# Reinstalar dependencias Python en contenedor
-docker exec nids_engine pip3 install --break-system-packages joblib tensorflow
-```
-
-### No se genera telemetría
-
-**Error**: `[NIDS-ESPERA] falta telemetría`
-
-**Solución**:
-- Verificar que el mutator está compilado en `progs.dat`
-- Verificar que Xonotic está escribiendo en `/telemetria/`
-- Conectar cliente Xonotic al servidor
-
-### Zeek no captura paquetes
-
-**Error**: Sin `nids_conn.log` en `zeek/`
-
-**Solución**:
-```bash
-# Verificar interfaz tailscale0 existe
-docker exec nids_engine ip link show
-
-# O usar interfaz alternativa (eth0):
-zeek -C -i eth0 /opt/nids_window.zeek ...
+docker logs -f servidor_xonotic
 ```
 
 ---
@@ -626,12 +494,6 @@ zeek -C -i eth0 /opt/nids_window.zeek ...
 ## 👤 Autor
 
 **inlopezv** - Trabajo de Fin de Grado (TFG)
-
----
-
-## 📄 Licencia
-
-Especificar licencia aquí si aplica.
 
 ---
 
