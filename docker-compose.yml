@@ -6,13 +6,14 @@ services:
       dockerfile: Dockerfile.xonotic
     image: server:latest
     container_name: servidor_xonotic
-    ports:
-      - "26000:26000/udp"
+    network_mode: "host"
+    # ports:
+    #   - "26000:26000/udp"
     volumes:
-      - ./data:/home/xonotic/.xonotic
+      - ./telemetria:/home/xonotic/.xonotic/data/data
+      - ./configuracion:/home/xonotic/.xonotic/data
       - ./codigo_juego:/home/xonotic/Xonotic
     
-    restart: unless-stopped
 
   # 2. El Analizador de Red (Zeek)
   zeek-monitor:
@@ -31,11 +32,13 @@ services:
     #normal, malicious_autocliker,flood_attack
     environment:
       - ETIQUETA=normal
+      #- ETIQUETA=ddos_udp_flood
     volumes:
       # Carpeta local donde guardaremos los logs de texto que genere Zeek
       - ./traffic_logs:/traffic_logs
+      # Carpeta local donde el servidor guarda la telemetria.
+      - ./telemetria:/telemetria
     # Le decimos a Zeek que escuche la interfaz 'eth0' en tiempo real
     depends_on:
       - xonotic-server
-    restart: unless-stopped
     
